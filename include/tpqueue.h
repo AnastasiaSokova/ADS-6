@@ -4,25 +4,34 @@
 
 template<typename T, int size>
 class TPQueue {
-  private:
+private:
     T arr[size];
-    int first;  
-    int last;   
+    int first;
+    int last;
+
 public:
     TPQueue() :first(0), last(0) { }
     void push(T x) {
         if (last - first >= size) {
             throw std::string("Full!");
         } else {
+            bool flag = false;
             for (int i = last; i >= first; --i) {
                 if (x.prior > arr[(i - 1) % size].prior && i > first) {
                     arr[i % size] = arr[(i - 1) % size];
+                    if (!flag) {
+                        last++;
+                        flag = true;
+                    }
                 } else {
+                    if (!flag) {
+                        last++;
+                    }
                     arr[i % size] = x;
                     break;
                 }
             }
-        }           
+        }
     }
     T pop() {
         return arr[(first++) % size];
