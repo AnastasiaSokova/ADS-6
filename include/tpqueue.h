@@ -3,10 +3,10 @@
 #define INCLUDE_TPQUEUE_H_
 #include <string>
 
-template<typename T, const int size>
+template<typename T, int size>
 class TPQueue {
  private:
-    T arr[size];
+    T arr[100];
     int first;
     int last;
 
